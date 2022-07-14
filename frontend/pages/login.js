@@ -16,11 +16,7 @@ export default function Signin() {
 
   return (
     <div className={styles.container}>
-      <Button
-        color="primary"
-        variant="contained"
-        handleOnAction={handleOnLogin}
-      >
+      <Button color="blue" variant="contained" handleOnAction={handleOnLogin}>
         Facebook Login
       </Button>
     </div>
