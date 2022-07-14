@@ -25,12 +25,12 @@ const theme = createTheme({
 function MyApp({ Component, pageProps }) {
   const Layout = Component.Layout ?? Noop;
   return (
-  
+    <ThemeProvider theme={theme}>
       <Layout>
         <ProgressBar />
         <Component {...pageProps} />
       </Layout>
-   
+    </ThemeProvider>
   );
 }
 
