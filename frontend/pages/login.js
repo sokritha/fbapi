@@ -3,7 +3,7 @@ import { TextField, Box } from "@mui/material";
 import { Button } from "@components/commons";
 import axios from "axios";
 
-const SERVER_URL = "http://localhost:4000/api/v1";
+const SERVER_URL = "https://fbapi-backend.herokuapp.com";
 
 export default function Signin() {
   const handleOnLogin = async () => {
