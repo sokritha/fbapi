@@ -14,10 +14,10 @@ app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 
 // Routes
+app.use("/api/v1/auth/facebook", authRouter);
+app.use("/api/v1/users", userRouter);
 app.use("/", (req, res) => {
   res.send("This is homepage");
 });
-app.use("/api/v1/auth/facebook", authRouter);
-app.use("/api/v1/users", userRouter);
 
 module.exports = app;
