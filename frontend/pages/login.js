@@ -9,6 +9,7 @@ export default function Signin() {
   const handleOnLogin = async () => {
     try {
       const response = await axios.get(`${SERVER_URL}/auth/facebook`);
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
