@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const https = require('https');
 
 dotenv.config({ path: "./config.env" });
 const app = require("./app");
@@ -19,3 +20,5 @@ const PORT = process.env.PORT || 4001;
 const server = app.listen(PORT, () => {
   console.log("App is running on port ", PORT);
 });
+
+https.createServer()

@@ -27,7 +27,8 @@ passport.use(
     {
       clientID: process.env.FB_APP_ID,
       clientSecret: process.env.FB_APP_SECRET,
-      callbackURL: process.env.BASE_SERVER_URL + "/auth/facebook/callback",
+      callbackURL:
+        "https://fbapi-backend.herokuapp.com/api/v1/auth/facebook/callback",
       profileFields: ["id", "first_name", "last_name", "email", "picture"],
     },
     async function (accessToken, refreshToken, profile, done) {
