@@ -42,23 +42,13 @@ const createSendToken = async (user, statusCode, res) => {
 };
 
 exports.loginFacbook = (req, res, next) => {
-  passport.authenticate("facebook", { session: false }, (err, user, info) => {
-    console.log("user", user);
-    console.log("info", info);
-    if (err || !user) {
-      return res.status(400).json({
-        status: "fail",
-        message: err,
-      });
+  passport.authenticate(
+    "facebook",
+    { session: false, failureRedirect: "/login" },
+    function (req, res) {
+      res.redirect("/dashboard");
     }
-
-    req.login(user, { session: false }, (err) => {
-      if (err) {
-        res.status(401).json({ status: "fail", message: err });
-      }
-      createSendToken(user, 200, res);
-    });
-  })(req, res, next);
+  );
 };
 
 exports.logout = (req, res) => {
