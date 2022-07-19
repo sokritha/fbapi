@@ -35,40 +35,46 @@ passport.use(
       console.log("token", accessToken);
       console.log("refreshtoken", refreshToken);
       console.log("profile", profile);
-      try {
-        const user = await User.findOneOrCreate(
-          { id: profile },
-          {
-            email: profile._json.email || "",
-            firstName: profile._json.given_name,
-            lastName: profile._json.family_name,
-            facebookId: profile.id,
-            phone: profile._json_phone || "",
-          }
-        );
+      User.findOne({ facebookId: profile.id }, function (err, user) {
+        if (err) {
+          console.log(err);
+        }
 
-        return done(null, user);
-      } catch (err) {
-        return done(null, null, err);
-      }
+        if (!err && user !== null) {
+          done(null, user);
+        } else {
+          const user = new User({
+            facebookId: profile.id,
+            firstName: profile._json.first_name,
+            lastName: profile._json.last_name,
+            email: profile._json.email,
+          });
+          user.save(function (err) {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log(err);
+              done(null, user);
+            }
+          });
+        }
+      });
     }
   )
 );
 
-router
-  .route("/")
-  .get(
-    passport.authenticate("facebook", {
-      scope: [
-        "email",
-        "pages_show_list",
-        "pages_read_user_content",
-        "pages_read_engagement",
-        "pages_manage_posts",
-        "pages_manage_engagement",
-      ],
-    })
-  );
+router.route("/").get(
+  passport.authenticate("facebook", {
+    scope: [
+      "email",
+      "pages_show_list",
+      "pages_read_user_content",
+      "pages_read_engagement",
+      "pages_manage_posts",
+      "pages_manage_engagement",
+    ],
+  })
+);
 
 router.route("/callback").get(authController.loginFacbook);
 

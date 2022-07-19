@@ -16,9 +16,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Field facebook id is not provided"],
   },
-  phone: {
-    type: String,
-  },
   pages: [
     {
       type: mongoose.Schema.ObjectId,
@@ -27,8 +24,8 @@ const userSchema = new mongoose.Schema({
   ],
   roles: {
     type: String,
-    enum: ["admin", "premium-user", "normal-user"],
-    default: "normal-user",
+    enum: ["ADMIN", "PREMIUM_USER", "NORMAL_USER"],
+    default: "NORMAL_USER",
   },
 });
 

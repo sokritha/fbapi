@@ -42,7 +42,8 @@ const createSendToken = async (user, statusCode, res) => {
 
 exports.loginFacbook = (req, res, next) => {
   passport.authenticate("facebook", { session: false }, (err, user, info) => {
-    console.log(user);
+    console.log("user", user);
+    console.log("info", info);
     if (err || !user) {
       return res.status(400).json({
         status: "fail",
