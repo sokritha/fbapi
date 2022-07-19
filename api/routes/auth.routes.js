@@ -57,7 +57,18 @@ passport.use(
 
 router
   .route("/")
-  .get(passport.authenticate("facebook", { scope: ["email", "manage_pages"] }));
+  .get(
+    passport.authenticate("facebook", {
+      scope: [
+        "email",
+        "pages_show_list",
+        "pages_read_user_content",
+        "pages_read_engagement",
+        "pages_manage_posts",
+        "pages_manage_engagement",
+      ],
+    })
+  );
 
 router.route("/callback").get(authController.loginFacbook);
 
