@@ -1,4 +1,5 @@
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 const signToken = (id) => {
   return new Promise((resolve, reject) => {
