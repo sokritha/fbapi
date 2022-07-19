@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const cors = require("cors");
 const userRouter = require("./routes/user.routes");
 const authRouter = require("./routes/auth.routes");
@@ -7,6 +8,7 @@ const app = express();
 
 // Global Middleware
 
+app.use(passport.initialize());
 app.use(cors());
 // Body parser ()
 // (convert the body from post request to json[express.json()] + html post form to json[express.urlencoded()])
