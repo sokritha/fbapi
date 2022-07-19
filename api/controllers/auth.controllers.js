@@ -29,7 +29,7 @@ const createSendToken = async (user, statusCode, res) => {
     httpOnly: true, // cookie cannot be accessed or modified through browser
   };
 
-  if (process.env.NODE_ENV === "production") cookieOptions.secure = ture; // create only in https
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true; // create only in https
 
   res.cookie("jwt", token, cookieOptions);
 
