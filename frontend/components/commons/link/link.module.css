@@ -3,6 +3,7 @@
   font-size: 0.84em;
   font-weight: 700;
   margin-left: 48px;
+  color: white;
 }
 
 .link:hover, .activeLink {
