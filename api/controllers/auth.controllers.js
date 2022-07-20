@@ -29,30 +29,25 @@ const createSendToken = async (user, statusCode, res) => {
     httpOnly: true, // cookie cannot be accessed or modified through browser
   };
 
-  if (process.env.NODE_ENV === "production") cookieOptions.secure = true; // create only in https
-
   res.cookie("jwt", token, cookieOptions);
-
-  res.status(statusCode).json({
-    status: "success",
-    data: {
-      user,
-    },
-  });
 };
 
 exports.loginFacbook = (req, res, next) => {
-  console.log(req);
-  passport.authenticate(
-    "facebook",
-    {
-      session: false,
-      failureRedirect: "https://fbapi-omega.vercel.app/login",
-    },
-    function (req, res) {
-      res.redirect("https://fbapi-omega.vercel.app/dashboard");
+  passport.authenticate("facebook", { session: false }, (err, user, info) => {
+    // Decide what to do on authentication
+    if (err || !user) {
+      return res.redirect(
+        process.env.BASE_CLIENT_URL + "/login?error=" + info.message
+      );
     }
-  );
+    req.login(user, { session: false }, (err) => {
+      if (err) {
+        res.status(400).send({ err });
+      }
+      createSendToken(user.facebookId);
+      res.redirect(process.env.BASE_CLIENT_URL + "/dashboard");
+    });
+  })(req, res, next);
 };
 
 exports.logout = (req, res) => {

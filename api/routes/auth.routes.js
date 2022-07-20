@@ -4,8 +4,8 @@ const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const FacebookStrategy = require("passport-facebook").Strategy;
-const authController = require("../controllers/auth.controllers");
 const User = require("../models/user.model");
+const authController = require("./../controllers/auth.controllers");
 
 const router = express.Router();
 
@@ -76,14 +76,6 @@ router.route("/").get(
   })
 );
 
-router.route("/callback").get(
-  passport.authenticate("facebook", {
-    session: false,
-    failureRedirect: "https://fbapi-omega.vercel.app/login",
-  }),
-  function (req, res) {
-    res.redirect("https://fbapi-omega.vercel.app/dashboard");
-  }
-);
+router.route("/callback").get(authController.loginFacbook);
 
 module.exports = router;
