@@ -29,7 +29,7 @@ const createSendToken = async (user, statusCode, res) => {
     httpOnly: true, // cookie cannot be accessed or modified through browser
   };
 
-  res.cookie("jwt", token, cookieOptions);
+  res.cookie("jwt_token", token, cookieOptions);
 };
 
 exports.loginFacbook = (req, res, next) => {
