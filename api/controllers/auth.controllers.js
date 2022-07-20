@@ -44,9 +44,12 @@ const createSendToken = async (user, statusCode, res) => {
 exports.loginFacbook = (req, res, next) => {
   passport.authenticate(
     "facebook",
-    { session: false, failureRedirect: "/login" },
+    {
+      session: false,
+      failureRedirect: "https://fbapi-omega.vercel.app//login",
+    },
     function (req, res) {
-      res.redirect("/dashboard");
+      res.redirect("https://fbapi-omega.vercel.app//dashboard");
     }
   );
 };
