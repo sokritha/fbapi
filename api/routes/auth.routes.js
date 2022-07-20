@@ -76,6 +76,14 @@ router.route("/").get(
   })
 );
 
-router.route("/callback").get(authController.loginFacbook);
+router.route("/callback").get(
+  passport.authenticate("facebook", {
+    session: false,
+    failureRedirect: "https://fbapi-omega.vercel.app/login",
+  }),
+  function (req, res) {
+    res.redirect("https://fbapi-omega.vercel.app/dashboard");
+  }
+);
 
 module.exports = router;
