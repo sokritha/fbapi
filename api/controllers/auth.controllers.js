@@ -46,10 +46,10 @@ exports.loginFacbook = (req, res, next) => {
     "facebook",
     {
       session: false,
-      failureRedirect: "https://fbapi-omega.vercel.app//login",
+      failureRedirect: "https://fbapi-omega.vercel.app/login",
     },
     function (req, res) {
-      res.redirect("https://fbapi-omega.vercel.app//dashboard");
+      res.redirect("https://fbapi-omega.vercel.app/dashboard");
     }
   );
 };
